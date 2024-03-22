@@ -7,7 +7,7 @@
 class CImGuiMan
 {
 public:
-	void InitImgui(void** pRenderFunc);
+	void InitImgui();
 	void ShutdownImgui();
 	void RenderImGui();
 

@@ -4,6 +4,7 @@
 #include "SDL.h"
 
 CImGuiMan g_ImGuiMan;
+extern modfuncs_s* g_pModFuncs;
 
 static void ImGuiRenderFunc()
 {
@@ -12,12 +13,17 @@ static void ImGuiRenderFunc()
 
 static int ImGuiEventFilter(void*, SDL_Event* event)
 {
-	return ImGui_ImplSDL2_ProcessEvent(event);
+	return static_cast<int>(ImGui_ImplSDL2_ProcessEvent(event));
 }
 
-void CImGuiMan::InitImgui(void **pRenderFunc)
+void CImGuiMan::InitImgui()
 {
 	m_pWindow = GetSdlWindow();
+	if (!m_pWindow)
+	{
+		gEngfuncs.Con_DPrintf("Failed to get SDL Window! ImGui is unavailable.\n");
+		return;
+	}
 
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
@@ -38,7 +44,7 @@ void CImGuiMan::InitImgui(void **pRenderFunc)
 
 	SDL_AddEventWatch(ImGuiEventFilter, nullptr);
 
-	*pRenderFunc = ImGuiRenderFunc;
+	g_pModFuncs->m_pfnFrameRender2 = ImGuiRenderFunc;
 }
 
 void CImGuiMan::ShutdownImgui()
@@ -69,12 +75,5 @@ void CImGuiMan::RenderImGui()
 
 SDL_Window* CImGuiMan::GetSdlWindow()
 {
-	SDL_Window* pWindow = nullptr;
-	int i = 0;
-
-	while ((pWindow = SDL_GetWindowFromID(i)) == nullptr)
-	{
-		i++;
-	}
-	return pWindow;
+	return SDL_GetWindowFromID(1);
 }

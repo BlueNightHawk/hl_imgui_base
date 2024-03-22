@@ -48,6 +48,8 @@ TeamFortressViewport* gViewPort = NULL;
 #include "particleman.h"
 IParticleMan* g_pParticleMan = nullptr;
 
+modfuncs_s* g_pModFuncs = nullptr;
+
 void CL_LoadParticleMan();
 void CL_UnloadParticleMan();
 
@@ -159,26 +161,6 @@ int DLLEXPORT Initialize(cl_enginefunc_t* pEnginefuncs, int iVersion)
 
 /*
 ==========================
-	CL_InitModFuncs
-==========================
-*/
-
-void CL_InitModFuncs(int ofs)
-{
-	// Functions called every frame
-	void** ppfnFrameBegin;	 // Called at the beginning of each frame cycle
-	void** ppfnFrameRender1; // Called at the beginning of the render loop
-	void** ppfnFrameRender2; // Called at the end of the render loop
-
-	ppfnFrameBegin = reinterpret_cast<void**>(ofs + 44);
-	ppfnFrameRender1 = reinterpret_cast<void**>(ofs + 48);
-	ppfnFrameRender2 = reinterpret_cast<void**>(ofs + 52);
-
-	g_ImGuiMan.InitImgui(ppfnFrameRender1);
-}
-
-/*
-==========================
 	HUD_VidInit
 
 Called when the game initializes
@@ -213,6 +195,8 @@ void DLLEXPORT HUD_Init()
 	InitInput();
 	gHUD.Init();
 	Scheme_Init();
+
+	g_ImGuiMan.InitImgui();
 }
 
 
@@ -339,8 +323,7 @@ void CL_LoadParticleMan()
 extern "C" void DLLEXPORT F(void* pv)
 {
 	cldll_func_t* pcldll_func = (cldll_func_t*)pv;
-
-	CL_InitModFuncs((int)pcldll_func->pInitFunc);
+	g_pModFuncs = reinterpret_cast<modfuncs_s*>(pcldll_func->pInitFunc);
 
 	cldll_func_t cldll_func =
 		{
