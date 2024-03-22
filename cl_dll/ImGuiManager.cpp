@@ -10,6 +10,11 @@ static void ImGuiRenderFunc()
 	g_ImGuiMan.RenderImGui();
 }
 
+static int ImGuiEventFilter(void*, SDL_Event* event)
+{
+	return ImGui_ImplSDL2_ProcessEvent(event);
+}
+
 void CImGuiMan::InitImgui(void **pRenderFunc)
 {
 	m_pWindow = GetSdlWindow();
@@ -21,27 +26,25 @@ void CImGuiMan::InitImgui(void **pRenderFunc)
 	(void)io;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
 
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
 	// ImGui::StyleColorsLight();
 
-	io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
-
 	// Setup Platform/Renderer backends
 	ImGui_ImplSDL2_InitForOpenGL(m_pWindow, nullptr);
 	ImGui_ImplOpenGL2_Init();
 
-	SDL_AddEventWatch([](void*, SDL_Event* event)
-		{ return (int)ImGui_ImplSDL2_ProcessEvent(event); },
-		nullptr
-	);
+	SDL_AddEventWatch(ImGuiEventFilter, nullptr);
 
 	*pRenderFunc = ImGuiRenderFunc;
 }
 
 void CImGuiMan::ShutdownImgui()
 {
+	SDL_DelEventWatch(ImGuiEventFilter, nullptr);
+
 	// Cleanup
 	ImGui_ImplOpenGL2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
