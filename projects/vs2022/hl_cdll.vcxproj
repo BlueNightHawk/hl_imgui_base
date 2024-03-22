@@ -60,18 +60,18 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;CLIENT_DLL;CLIENT_WEAPONS;HL_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;CLIENT_DLL;CLIENT_WEAPONS;HL_DLL;WINDOWS_IGNORE_PACKING_MISMATCH;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\dlls;..\..\cl_dll;..\..\cl_dll\particleman;..\..\public;..\..\common;..\..\pm_shared;..\..\engine;..\..\utils\vgui\include;..\..\game_shared;..\..\external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\dlls;..\..\cl_dll;..\..\cl_dll\particleman;..\..\public;..\..\common;..\..\pm_shared;..\..\engine;..\..\utils\vgui\include;..\..\game_shared;..\..\external;..\..\external\SDL2;..\..\external\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalOptions>/Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\..\utils\vgui\lib\win32_vc6\vgui.lib;wsock32.lib;..\..\lib\public\sdl2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\..\utils\vgui\lib\win32_vc6\vgui.lib;wsock32.lib;..\..\lib\public\sdl2.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <BaseAddress>
       </BaseAddress>
     </Link>
@@ -142,6 +142,7 @@ cmd /c ""$(ProjectDir)..\..\filecopy.bat" "$(SolutionDir)../../network" "" "delt
     <ClCompile Include="..\..\cl_dll\hud_redraw.cpp" />
     <ClCompile Include="..\..\cl_dll\hud_spectator.cpp" />
     <ClCompile Include="..\..\cl_dll\hud_update.cpp" />
+    <ClCompile Include="..\..\cl_dll\ImGuiManager.cpp" />
     <ClCompile Include="..\..\cl_dll\input.cpp" />
     <ClCompile Include="..\..\cl_dll\inputw32.cpp" />
     <ClCompile Include="..\..\cl_dll\interpolation.cpp" />
@@ -153,6 +154,7 @@ cmd /c ""$(ProjectDir)..\..\filecopy.bat" "$(SolutionDir)../../network" "" "delt
     <ClCompile Include="..\..\cl_dll\particleman\CFrustum.cpp" />
     <ClCompile Include="..\..\cl_dll\particleman\IParticleMan_Active.cpp" />
     <ClCompile Include="..\..\cl_dll\saytext.cpp" />
+    <ClCompile Include="..\..\cl_dll\sdl2_fix.cpp" />
     <ClCompile Include="..\..\cl_dll\statusbar.cpp" />
     <ClCompile Include="..\..\cl_dll\status_icons.cpp" />
     <ClCompile Include="..\..\cl_dll\StudioModelRenderer.cpp" />
@@ -189,6 +191,13 @@ cmd /c ""$(ProjectDir)..\..\filecopy.bat" "$(SolutionDir)../../network" "" "delt
     <ClCompile Include="..\..\dlls\tripmine.cpp" />
     <ClCompile Include="..\..\dlls\weapons_shared.cpp" />
     <ClCompile Include="..\..\dlls\glock.cpp" />
+    <ClCompile Include="..\..\external\imgui\backends\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="..\..\external\imgui\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="..\..\external\imgui\imgui.cpp" />
+    <ClCompile Include="..\..\external\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\..\external\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\..\external\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\..\external\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\..\game_shared\filesystem_utils.cpp" />
     <ClCompile Include="..\..\game_shared\vgui_checkbutton2.cpp" />
     <ClCompile Include="..\..\game_shared\vgui_grid.cpp" />
@@ -207,6 +216,7 @@ cmd /c ""$(ProjectDir)..\..\filecopy.bat" "$(SolutionDir)../../network" "" "delt
     <ClInclude Include="..\..\cl_dll\ammo.h" />
     <ClInclude Include="..\..\cl_dll\ammohistory.h" />
     <ClInclude Include="..\..\cl_dll\camera.h" />
+    <ClInclude Include="..\..\cl_dll\CImGuiMan.h" />
     <ClInclude Include="..\..\cl_dll\cl_dll.h" />
     <ClInclude Include="..\..\cl_dll\cl_util.h" />
     <ClInclude Include="..\..\cl_dll\com_weapons.h" />

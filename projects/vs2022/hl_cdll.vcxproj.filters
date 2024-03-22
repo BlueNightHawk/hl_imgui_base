@@ -64,6 +64,15 @@
     <Filter Include="Source Files\cl_dll\particleman">
       <UniqueIdentifier>{7085339d-2b33-4cdf-846c-0e4c7d33add8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\imgui">
+      <UniqueIdentifier>{29dc19da-aaba-4179-b906-e7c63b2a89a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imgui\backends">
+      <UniqueIdentifier>{d50caf3d-d909-4771-a25b-4211f4ec8f8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cl_dll\hl_imgui">
+      <UniqueIdentifier>{9fda0369-3477-4cd8-a346-604e19c6bca4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\dlls\crossbow.cpp">
@@ -320,6 +329,33 @@
     </ClCompile>
     <ClCompile Include="..\..\cl_dll\particleman\CBaseParticle.cpp">
       <Filter>Source Files\cl_dll\particleman</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\imgui\imgui.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\imgui\imgui_demo.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\imgui\imgui_draw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\imgui\imgui_tables.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\imgui\backends\imgui_impl_opengl2.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\external\imgui\backends\imgui_impl_sdl2.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cl_dll\sdl2_fix.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cl_dll\ImGuiManager.cpp">
+      <Filter>Source Files\cl_dll\hl_imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -595,6 +631,9 @@
     </ClInclude>
     <ClInclude Include="..\..\cl_dll\particleman\CBaseParticle.h">
       <Filter>Header Files\cl_dll\particleman</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\cl_dll\CImGuiMan.h">
+      <Filter>Source Files\cl_dll\hl_imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

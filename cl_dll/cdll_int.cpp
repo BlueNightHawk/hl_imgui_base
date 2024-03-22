@@ -38,6 +38,8 @@
 #include "vgui_TeamFortressViewport.h"
 #include "filesystem_utils.h"
 
+#include "CImGuiMan.h"
+
 cl_enginefunc_t gEngfuncs;
 CHud gHUD;
 TeamFortressViewport* gViewPort = NULL;
@@ -171,6 +173,8 @@ void CL_InitModFuncs(int ofs)
 	ppfnFrameBegin = reinterpret_cast<void**>(ofs + 44);
 	ppfnFrameRender1 = reinterpret_cast<void**>(ofs + 48);
 	ppfnFrameRender2 = reinterpret_cast<void**>(ofs + 52);
+
+	g_ImGuiMan.InitImgui(ppfnFrameRender1);
 }
 
 /*
